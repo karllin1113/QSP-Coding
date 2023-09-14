@@ -40,6 +40,9 @@ class sequenceGenerator:
         # Scale Pi by v
         # Create a list of n of such
         return [v * Pi for i in range(self.n)]
+
+    def BB1(self,x):
+        return [Pi/2, -x, 2*x,0,-2*x,x]
     
 class functionBlockEncoding:
     def __init__(self) -> None:
@@ -100,6 +103,30 @@ class functionBlockEncoding:
         # Set the tick values
         plt.xticks(np.arange(0, 7*Pi/2, step=(Pi/2)), ['0','π/2','π','3π/2','2π','5π/2','3π'])
         plt.yticks(np.arange(-1, 2, step=1), ['-1','0','1'])
+        plt.show() 
+
+    def conjugateIterateMatrixSeqPlotAltAbs(self, phiList: list, xmin: float=-Pi, xmax: float=Pi, shots: int=500) -> plt.plot:
+        '''
+            Return: an alternate plot of the upper left element of abs(conjugateIterateMatrixSeq)^2
+                    runs (default) from -Pi -> Pi
+
+            phiList: a list of phase angles, phi
+            xmin, xmax: minimum and maximum ranges for the x-axis of the graph
+            shots: number of linspace elements
+        '''
+        x = np.linspace(xmin, xmax, 500)
+
+        # Compute values for each x.
+        y = [abs(self.conjugateIterateMatrixSeq(xi, phiList)[0, 0])**2 for xi in x]
+
+        # Plot the function
+        plt.plot(x, y)
+
+        # Set the tick values
+        if xmin == -Pi and xmax == Pi:
+            plt.xticks(np.arange(-Pi,2*Pi, step=(Pi)), ['-π','0','π'])
+
+        plt.yticks(np.arange(0, 2, step=1), ['0','1'])
         plt.show() 
 
     def chebyshevPlot(self, degree: int, span: bool=False) -> plt.plot:
@@ -194,4 +221,8 @@ class functionBlockEncoding:
 
         # Plot the function
         plt.plot(x, y)
-        plt.show()              
+        plt.show()  
+
+
+
+
