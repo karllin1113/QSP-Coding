@@ -5,6 +5,12 @@ from matplotlib import pyplot as plt
 from numpy.linalg import matrix_power
 
 class sequenceGenerator:
+    '''
+        A class defining different sequence of angles for QSP method
+            Defualt sequence size is 10
+
+        Types: randomSeq, randomPiSeq, fixedPiSeq, BB1
+    '''
     def __init__(self,n: int=10) -> None:
         self.n=n
 
@@ -41,10 +47,16 @@ class sequenceGenerator:
         # Create a list of n of such
         return [v * Pi for i in range(self.n)]
 
-    def BB1(self,x):
+    def BB1(self, x: float=0.5 * np.arccos(-0.25)):
+        '''
+            Return: the BB1 sequence as defined in 
+                    arXiv:2105.02859v5
+            
+            x: (default = 0.5 * np.arccos(-0.25)) a variable
+        '''
         return [Pi/2, -x, 2*x,0,-2*x,x]
     
-class functionBlockEncoding:
+class sequencePlotting:
     def __init__(self) -> None:
         pass
 
@@ -70,6 +82,9 @@ class functionBlockEncoding:
 
             theta: the polar angle
             phiList: a list of phase angles, phi
+
+            Type: [Exp(i * phi1), 0 ] * [cos(theta), -i * sin(theta)] * [Exp(i * phi2), 0 ]
+                  [0, Exp(i * -phi1)]   [i * sin(theta), cos(theta) ]   [0, Exp(i * -phi2)]
         '''
 
         # Initialise the product matrix as the initial phase
@@ -83,7 +98,7 @@ class functionBlockEncoding:
 
         return prod
     
-    def conjugateIterateMatrixSeqPlot(self, phiList: list, shots: int=500) -> plt.plot:
+    def conjugateIterateMatrixSeqPlot(self, phiList: list, name: str=None, shots: int=500) -> plt.plot:
         '''
             Return: a plot of the upper left element of conjugateIterateMatrixSeq
                     runs from 0 -> 3Pi
@@ -103,9 +118,10 @@ class functionBlockEncoding:
         # Set the tick values
         plt.xticks(np.arange(0, 7*Pi/2, step=(Pi/2)), ['0','π/2','π','3π/2','2π','5π/2','3π'])
         plt.yticks(np.arange(-1, 2, step=1), ['-1','0','1'])
+        plt.title('{}: Conjugate Iterate Matrix Sequence Plot'.format(name))
         plt.show() 
 
-    def conjugateIterateMatrixSeqPlotAltAbs(self, phiList: list, xmin: float=-Pi, xmax: float=Pi, shots: int=500) -> plt.plot:
+    def conjugateIterateMatrixSeqPlotAltAbs(self, phiList: list, xmin: float=-Pi, xmax: float=Pi, name: str=None, shots: int=500) -> plt.plot:
         '''
             Return: an alternate plot of the upper left element of abs(conjugateIterateMatrixSeq)^2
                     runs (default) from -Pi -> Pi
@@ -127,9 +143,10 @@ class functionBlockEncoding:
             plt.xticks(np.arange(-Pi,2*Pi, step=(Pi)), ['-π','0','π'])
 
         plt.yticks(np.arange(0, 2, step=1), ['0','1'])
+        plt.title('{}: Conjugate Iterate Matrix Sequence Plot [Alt, Abs^2]'.format(name))
         plt.show() 
 
-    def chebyshevPlot(self, degree: int, span: bool=False) -> plt.plot:
+    def chebyshevPlot(self, degree: int, span: bool=False, name: str=None, ) -> plt.plot:
         '''
             Return: a plot of the nth degree Chebyshev polynomial
                     as calculated by a different iterate matrix
@@ -142,6 +159,7 @@ class functionBlockEncoding:
             y = [matrix_power(np.array([[xi, 1j * math.sqrt(1 - xi**2)], [1j * math.sqrt(1 - xi**2), xi]]),degree)[0,0] for xi in x]
             # plt.plot(x, matrix_power(np.array([[x, 1j * math.sqrt(1 - x**2)], [1j * math.sqrt(1 - x**2), x]]),degree)[0,0])
             plt.plot(x,y)
+            plt.title('{}: Chebyshev Plot'.format(name))
             plt.show() 
         else:
             x = np.linspace(-1, 1, 500)
@@ -151,6 +169,7 @@ class functionBlockEncoding:
                             label = "T_{}(x)".format(i))
                 
             plt.legend()
+            plt.title('{}: Chebyshev Plot'.format(name))
             plt.show()
 
     def iterateMatrix(self, theta: float, phi: float) -> np.array:
@@ -159,6 +178,9 @@ class functionBlockEncoding:
 
             theta: the polar angle
             phi: the azimuthal angle
+
+            Type: [cos(theta), -i * Exp(-i * phi) * sin(theta)]
+                  [i * Exp(i * phi) * sin(theta), cos(theta)  ]
         '''
         # Define cos(x/2) and sin(x/2) for ease
         c, s = np.cos(theta * 0.5), np.sin(theta * 0.5)
@@ -174,6 +196,9 @@ class functionBlockEncoding:
 
             theta: the polar angle
             phiList: a list of phase angles, phi
+
+            Type: [cos(theta), -i * Exp(-i * phi) * sin(theta)]
+                  [i * Exp(i * phi) * sin(theta), cos(theta)  ]
         '''
         # Initialize the product matrix as a 2x2 identity matrix
         prod = np.array([[1, 0], [0, 1]], dtype=complex)     
@@ -184,7 +209,7 @@ class functionBlockEncoding:
 
         return prod
     
-    def iterateMatrixSeqPlot(self, phiList: list, shots: int=500) -> plt.plot:
+    def iterateMatrixSeqPlot(self, phiList: list, name: str=None, shots: int=500) -> plt.plot:
         '''
             Return: a plot of the upper left element of iterateMatrixSeq
                     runs from 0 -> 3Pi
@@ -204,14 +229,17 @@ class functionBlockEncoding:
         # Set the tick values
         plt.xticks(np.arange(0, 7*Pi/2, step=(Pi/2)), ['0','π/2','π','3π/2','2π','5π/2','3π'])
         plt.yticks(np.arange(-1, 2, step=1), ['-1','0','1'])
+        plt.title('{}: Iterate Matrix Sequence Plot'.format(name))
         plt.show()    
 
-    def iterateMatrixSeqPlotAlt(self, phiList: list, shots: int=500) -> plt.plot:
+    def iterateMatrixSeqPlotAlt(self, phiList: list, name: str=None, shots: int=500) -> plt.plot:
         '''
             Return: an plot of an alternate sequence where theta |-> -2*np.arccos(x)
 
             phiList: a list of phase angles, phi
             shots: number of linspace elements
+
+            Note: input a sequence of zeros of size n for Chebyshev of degree n
         '''
         # For now we extra the Re([0][0]) component
         x = np.linspace(-1, 1, 500)
@@ -221,6 +249,7 @@ class functionBlockEncoding:
 
         # Plot the function
         plt.plot(x, y)
+        plt.title('{}: Iterate Matrix Sequence Plot [Alt]'.format(name))
         plt.show()  
 
 
