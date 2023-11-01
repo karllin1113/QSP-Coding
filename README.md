@@ -79,6 +79,11 @@ Provide a list of keys to perform desired tasks based on the following legend:
 ```
 Provide a file name for your quantum circuit data: demo_qc
 ```
+## Testing
+To test the numerical and Trotter Hamiltonian simulation module, run:
+```
+python tests/numerical_trotter_testing.py
+```
 ## Contributions
 This code has three main contributors. The main contributions of each author is as follows (not exhaustive contribution list):
 - Gabriel Waite: numerical and Trotter Hamiltonian simulation code
