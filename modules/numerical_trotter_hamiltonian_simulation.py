@@ -134,8 +134,8 @@ def trotterScalingModel(time: float, func_varibale: str = 't',func_str: str = '2
 
     step_scaling = result.evalf()
 
-    # if step_scaling < 0:
-    #     raise ValueError('Your input function must evaluate to a positive value for all time > 0.')
+    if step_scaling < 0:
+        raise ValueError('Your input function must evaluate to a positive value for all time > 0.')
 
     return int(step_scaling)
 
