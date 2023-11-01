@@ -14,15 +14,16 @@ Then, pip install the required dependencies:
 ```
 pip install -r requirement.txt
 ```
-Next, clone the repository:
+Next, clone the repository and checkout the `final_submission` branch:
 ```
-git clone https://...
+git clone https://github.com/GabrielWaite/QSP-Coding.git
+git checkout final_submission
 ```
 ## Running the file
-To run the file, move into the correct directory then call the file ```parent.py```:
+To run the file, move into the correct directory then call the file ```main.py```:
 ```
 cd <folder name>
-python parent.py
+python main.py
 ```
 
 ## Taking User Inputs
