@@ -1085,4 +1085,4 @@ class TrotterHamiltonianSimulation:
         print("Data saved to {}.\nMetadata saved to {}.".format(file_data, file_metadata))
 
 if __name__=="__main__":
-    print('This is the Numerical and Trotter Hamiltonian Simulation Module.\nThe contents of this file were complied by Gabriel Waite with some help and collaboration from Karl Lin and Soumya Sarkar.\nThis module can be used as a standalone peice of work, however, is best run in a jupyter notebook. Consult the /docs folder to see an example document of how to use this module.'
+    print('This is the Numerical and Trotter Hamiltonian Simulation Module.\nThe contents of this file were complied by Gabriel Waite with some help and collaboration from Karl Lin and Soumya Sarkar.\nThis module can be used as a standalone peice of work, however, is best run in a jupyter notebook. Consult the /docs folder to see an example document of how to use this module.')
