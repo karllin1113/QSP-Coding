@@ -696,7 +696,8 @@ class TrotterHamiltonianSimulation:
 
         qc = QuantumCircuit(self.qubit_count)
         self.getQuantumCircuit(quantum_circuit=qc, trotter_step_scaling_func='t', execution_time=1)
-        qc.qasm(filename = file_name)
+        output_file_name = 'trotter_qasm_{}.txt'.format(file_name)
+        qc.qasm(filename = output_file_name)
 
         return "File saved as {}!".format(file_name)
 
