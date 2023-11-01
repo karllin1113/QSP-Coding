@@ -79,6 +79,17 @@ Provide a list of keys to perform desired tasks based on the following legend:
 ```
 Provide a file name for your quantum circuit data: demo_qc
 ```
+### Output
+By default, the Trotter and QSP ```QISKIT``` OpenQASM files will be saved.
+
+Based on tasks requested at question 6, a number of files will be saved also.
+
+- 0: metadata.txt file with statevector information
+- 1: metadata.txt file with energy informaiton
+- 2: metadata.txt file for the problem setting and a data.csv file with the energy evolution data for the spread of times
+- 3: metadata.txt file for the problem setting and a data.csv file with the fidelity evolution data for the spread of times
+
+If '[]' is passed at question 6 then only the quantum circuit for the problem setting is saved.
 ## Testing
 To test the numerical and Trotter Hamiltonian simulation module, run:
 ```
