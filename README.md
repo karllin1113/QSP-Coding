@@ -73,13 +73,21 @@ Provide a list of keys to perform desired tasks based on the following legend:
                 :[0]
 ```
 
-7. *Questions*
-
+7. *Provide a file name for your state vector data:*
+```
+Provide a file name for your state vector data: demo
+```
 8. *Provide a file name for your quantum circuit data:*
 ```
 Provide a file name for your quantum circuit data: demo_qc
 ```
-### Output
+### Example Output
+For the example just shown, **three** files will be returned:
+1. `statevector_demo_metadata.txt`
+2. `trotter_qasm_demo_qc.txt`
+3. `qsp_qasm_demo_qc.txt`
+
+## General Output
 By default, the Trotter and QSP ```QISKIT``` OpenQASM files will be saved.
 
 Based on tasks requested at question 6, a number of files will be saved also.
