@@ -186,7 +186,7 @@ class QET_LinLin():
         
         # Quantum registers
         qreg_ctrl = QuantumRegister(1, "signal_ctrl")
-        qreg_be = QuantumRegister(self.num_BE_qubits, "BE")
+        qreg_be = QuantumRegister(self.num_BE_qubits, "block_encode")
         qreg_input = QuantumRegister(self.num_qubits, "input")
                         
         qet_circ = QuantumCircuit(qreg_ctrl, qreg_be, qreg_input)
@@ -566,7 +566,7 @@ We recommand reducing the evolution time to be less than 5.0 and the truncation 
             self.HamSim_circ = None
         
         # Quantum registers
-        qreg_HS_ctrl = QuantumRegister(1, "HamSim_ctrl")
+        qreg_HS_ctrl = QuantumRegister(1, "ctrl_LCU")
         qreg_QET_input = QuantumRegister(1 + self.num_BE_qubits + self.num_qubits)
 
         main_circ = QuantumCircuit(qreg_HS_ctrl, qreg_QET_input)
